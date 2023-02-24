@@ -7,21 +7,21 @@ const Flex = styled('div')({
   alignItems: 'center',
   justifyContent: 'center'
 })
-const MyComponent = styled('div')({
+const Container = styled('div')({
   color: 'black',
-  backgroundColor: '#EAE0C8',
+  backgroundColor: 'white',
   padding: 8,
   borderRadius: 30,
   width: '28em',
   height: '32em',
 });
 
-function App() {
+function RentalView() {
   return (
     <Flex>
-      <MyComponent>App</MyComponent>
+      <Container className="container">Rental view</Container>
     </Flex>
   )
 }
 
-export default App
+export default RentalView
