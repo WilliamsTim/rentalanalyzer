@@ -74,8 +74,10 @@
     padding: 8;
     border-radius: 10%;
     width: 32%;
-    height: 75%;
+    height: 72%;
     min-width: 20em;
+    overflow: hidden;
+    position: relative;
     box-shadow:
       2.8px 2.8px 2.2px rgba(0, 0, 0, 0.15),
       6.7px 6.7px 5.3px rgba(0, 0, 0, 0.108),
@@ -98,4 +100,8 @@
     height: 100vh;
     align-items: center;
     justify-content: center;
+  }
+
+  .slidebox {
+    transition: left 2s ease-in-out;
   }
