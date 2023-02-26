@@ -8,9 +8,13 @@ function RentalView() {
   // variable definitions
   const [searchParams] = useSearchParams();
   const [unloaded, setUnloaded] = useState(true);
+  const [data, setData] = useState();
   const EPPM = searchParams.get('EPPM');
   const TPPM = searchParams.get('TPPM');
 
+  // function definitions
+
+  // execute on component mount
   useEffect(() => {
     //axios call to backend to get the information and set the information
     axios.get('http://localhost:3001/api/mortgagecalculator', { params: {
