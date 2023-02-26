@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 import House from '../images/House.png';
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
   const [error, setError] = useState([false, false, false, false, false])
   const formOne = useRef(null);
   const formTwo = useRef(null);
+  const navigate = useNavigate();
 
   // function definitions
   const handleClick = () => {
@@ -40,7 +42,21 @@ function Home() {
     // the form doesn't count the image, text or button, so it is just indexes 0-4 that have the necessary info
   }
   const handleRedirect = (e) => {
-    window.location.href=`http://localhost:3000/rentalview?amount=${formOne.current[0].value}&percentage=${formOne.current[1].value}&interest=${formOne.current[2].value}&EPPM=${formOne.current[3].value}&TPPM=${formOne.current[4].value}&propertyTax=${formTwo.current[0].value || '1'}&homeAssoc=${formTwo.current[1].value}&homeIns=${formTwo.current[2].value}&PMI=${formTwo.current[3].value}`;
+    const params = {
+      amount: formOne.current[0].value,
+      percentage: formOne.current[1].value,
+      interest: formOne.current[2].value,
+      EPPM: formOne.current[3].value,
+      TPPM: formOne.current[4].value,
+      propertyTax: formTwo.current[0].value || '1',
+      homeAssoc: formTwo.current[1].value,
+      homeIns: formTwo.current[2].value,
+      PMI: formTwo.current[3].value,
+    }
+    navigate({
+      pathname: '/rentalview',
+      search: `?${createSearchParams(params)}`
+    })
   }
   return (
     <div className='outerContainer'>
@@ -70,12 +86,13 @@ function Home() {
           <TextField
             required
             id="standard-required"
-            label="Amount"
+            label="House Price"
             variant="standard"
             helperText={helperText[0]}
             error={error[0]}
             type="number"
             placeholder='E.g. 200000'
+            defaultValue='200000'
             sx={{
               mt: 0.5,
             }}
@@ -86,12 +103,13 @@ function Home() {
           <TextField
             required
             id="standard-required"
-            label="Percentage"
+            label="Down Payment Percentage"
             variant='standard'
             helperText={helperText[1]}
             error={error[1]}
             type="number"
             placeholder='E.g. 20'
+            defaultValue='20'
             sx={{
               mt: 1.5,
             }}
@@ -102,12 +120,13 @@ function Home() {
           <TextField
             required
             id="standard-required"
-            label="Interest"
+            label="Interest On Loan"
             variant='standard'
             helperText={helperText[2]}
             error={error[2]}
             type="number"
             placeholder='E.g. 6.5'
+            defaultValue='6.5'
             sx={{
               mt: 1.5,
             }}
@@ -123,7 +142,8 @@ function Home() {
             helperText={helperText[3]}
             error={error[3]}
             type="number"
-            placeholder='E.g. 2000'
+            placeholder='E.g. 1500'
+            defaultValue='1500'
             sx={{
               mt: 1.5,
             }}
@@ -134,12 +154,13 @@ function Home() {
           <TextField
             required
             id="standard-required"
-            label="Target Profit Per Month"
+            label="Target Profit Per Month After Expenses"
             variant='standard'
             helperText={helperText[4]}
             error={error[4]}
             type="number"
             placeholder='E.g. 500'
+            defaultValue='0'
             sx={{
               mt: 1.5,
             }}

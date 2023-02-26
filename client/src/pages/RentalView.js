@@ -2,32 +2,25 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Box } from '@mui/material';
 import { useSearchParams } from "react-router-dom";
+import Finances from '../images/Finances.png';
 
 function RentalView() {
   // variable definitions
   const [searchParams] = useSearchParams();
   const [loaded, setLoaded] = useState(false);
-  const amount = searchParams.get('amount');
-  const percentage = searchParams.get('percentage');
-  const interest = searchParams.get('interest');
   const EPPM = searchParams.get('EPPM');
   const TPPM = searchParams.get('TPPM');
-  const propertyTax = Number(searchParams.get('propertyTax'));
-  const homeAssoc = searchParams.get('homeAssoc');
-  const homeIns = searchParams.get('homeIns');
-  const PMI = searchParams.get('PMI');
-  console.log(propertyTax);
 
   useEffect(() => {
     //axios call to backend to get the information and set the information
     axios.get('http://localhost:3001/api/mortgagecalculator', { params: {
-      amount,
-      percentage,
-      interest,
-      propertyTax: propertyTax / 100,
-      homeAssoc,
-      PMI,
-      homeIns
+      amount: searchParams.get('amount'),
+      percentage: searchParams.get('percentage'),
+      interest: searchParams.get('interest'),
+      propertyTax: Number(searchParams.get('propertyTax')) / 100,
+      homeAssoc: searchParams.get('homeAssoc'),
+      PMI: searchParams.get('PMI'),
+      homeIns: searchParams.get('homeIns'),
     }})
       .then((response) => {
         console.log(response.data);
@@ -37,7 +30,7 @@ function RentalView() {
       })
   }, []);
 
-  // retuend component
+  // returned component
   return (
     <div className='outerContainer'>
       <div className="container">
@@ -51,7 +44,7 @@ function RentalView() {
             left: `0px`,
           }}
         >
-          Rental View!
+          <img src={Finances} alt={Finances} className='photo finances' />
       </Box>
       </div>
     </div>
