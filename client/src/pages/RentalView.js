@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box } from '@mui/material';
-import { useSearchParams } from "react-router-dom";
+import { Box, Typography, Button } from '@mui/material';
+import { useSearchParams, useNavigate } from "react-router-dom";
 import Finances from '../images/Finances.png';
+import Analysis from './components/Analysis';
+import './styles/RentalView.css'
 
 function RentalView() {
   // variable definitions
   const [searchParams] = useSearchParams();
   const [unloaded, setUnloaded] = useState(true);
-  const [data, setData] = useState();
+  const [data, setData] = useState({});
+  const navigate = useNavigate();
   const EPPM = searchParams.get('EPPM');
   const TPPM = searchParams.get('TPPM');
 
   // function definitions
+  const handleReturnHome = (e) => {
+    navigate({
+      pathname: '/',
+    })
+  }
 
   // execute on component mount
   useEffect(() => {
@@ -29,6 +37,7 @@ function RentalView() {
       .then((response) => {
         console.log(response.data);
         setUnloaded(false);
+        setData(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -47,11 +56,20 @@ function RentalView() {
             width: '100%',
             position: 'absolute',
             left: `0px`,
+            height: '100%',
           }}
         >
           <img src={Finances} alt={Finances} className='photo finances' />
+          {unloaded ? null : <Typography sx={{ fontSize: '1.2rem', mx: 'auto', mt: '-10px', mb: '5px' }}>number out of 3 matching results</Typography>}
           {unloaded ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
-          <div>Loaded!</div>
+                    // i Need a message at the top saying something about (the number of matches) out of 3 timeframes match your criteria
+          // I then need three of the same component, but with different props passed in
+          <div className='loadedContainer'>
+          <Analysis timeframe='Thirty' cost={data.tenYear} revenue={EPPM} target={TPPM} />
+          <Analysis timeframe='Fifteen' cost={data.fifteenYear} revenue={EPPM} target={TPPM} />
+          <Analysis timeframe='Ten' cost={data.thirtyYear} revenue={EPPM} target={TPPM} />
+          <Button variant='outlined' sx={{ mx: 'auto', mt: '10px' }} onClick={handleReturnHome}>Return To Home Page</Button>
+          </div>
           }
       </Box>
       </div>
