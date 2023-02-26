@@ -7,7 +7,7 @@ import Finances from '../images/Finances.png';
 function RentalView() {
   // variable definitions
   const [searchParams] = useSearchParams();
-  const [loaded, setLoaded] = useState(false);
+  const [unloaded, setUnloaded] = useState(true);
   const EPPM = searchParams.get('EPPM');
   const TPPM = searchParams.get('TPPM');
 
@@ -24,6 +24,7 @@ function RentalView() {
     }})
       .then((response) => {
         console.log(response.data);
+        setUnloaded(false);
       })
       .catch((err) => {
         console.log(err);
@@ -45,6 +46,9 @@ function RentalView() {
           }}
         >
           <img src={Finances} alt={Finances} className='photo finances' />
+          {unloaded ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
+          <div>Loaded!</div>
+          }
       </Box>
       </div>
     </div>
