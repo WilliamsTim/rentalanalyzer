@@ -94,7 +94,7 @@ function Home() {
             placeholder='E.g. 200000'
             defaultValue='200000'
             sx={{
-              mt: 0.5,
+              mt: '0.5vh',
             }}
             InputProps={{
               startAdornment: <InputAdornment position="start">$</InputAdornment>
@@ -111,7 +111,7 @@ function Home() {
             placeholder='E.g. 20'
             defaultValue='20'
             sx={{
-              mt: 1.5,
+              mt: '1.5vh',
             }}
             InputProps={{
               startAdornment: <InputAdornment position="start">%</InputAdornment>
@@ -128,7 +128,7 @@ function Home() {
             placeholder='E.g. 6.5'
             defaultValue='6.5'
             sx={{
-              mt: 1.5,
+              mt: '1.5vh',
             }}
             InputProps={{
               startAdornment: <InputAdornment position="start">%</InputAdornment>
@@ -145,7 +145,7 @@ function Home() {
             placeholder='E.g. 1500'
             defaultValue='1500'
             sx={{
-              mt: 1.5,
+              mt: '1.5vh',
             }}
             InputProps={{
               startAdornment: <InputAdornment position="start">$</InputAdornment>
@@ -162,7 +162,7 @@ function Home() {
             placeholder='E.g. 500'
             defaultValue='0'
             sx={{
-              mt: 1.5,
+              mt: '1.5vh',
             }}
             InputProps={{
               startAdornment: <InputAdornment position="start">$</InputAdornment>
@@ -172,8 +172,8 @@ function Home() {
             variant="outlined"
             onClick={validateBoxOne}
             sx={{
-              mt: 3,
-              mb: 4,
+              mt: '3vh',
+              mb: '4vh',
               borderRadius: 10,
             }}
           >
