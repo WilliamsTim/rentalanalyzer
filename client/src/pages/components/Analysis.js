@@ -54,7 +54,7 @@ function Analysis({ timeframe, cost, revenue, target }) {
           Target
         </p>
         <p className='green'>
-          {`$${target} min`}
+          {`$${target}`}
         </p>
       </div>
     </div>

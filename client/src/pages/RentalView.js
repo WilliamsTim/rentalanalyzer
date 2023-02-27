@@ -12,6 +12,7 @@ function RentalView() {
   const [unloaded, setUnloaded] = useState(true);
   const [data, setData] = useState({});
   const [counter, setCounter] = useState(0);
+  let number = 0;
   const navigate = useNavigate();
   const EPPM = searchParams.get('EPPM');
   const TPPM = searchParams.get('TPPM');
@@ -26,24 +27,26 @@ function RentalView() {
   // execute on component mount
   useEffect(() => {
     //axios call to backend to get the information and set the information
-    axios.get('http://localhost:3001/api/mortgagecalculator', { params: {
-      amount: searchParams.get('amount'),
-      percentage: searchParams.get('percentage'),
-      interest: searchParams.get('interest'),
-      propertyTax: Number(searchParams.get('propertyTax')) / 100,
-      homeAssoc: searchParams.get('homeAssoc'),
-      PMI: searchParams.get('PMI'),
-      homeIns: searchParams.get('homeIns'),
-    }})
+    console.log('using effect');
+    axios.get('https://mortgagecalculatorapi.netlify.app/.netlify/functions/mortgagecalculator', {
+      params: {
+        amount: searchParams.get('amount'),
+        percentage: searchParams.get('percentage'),
+        interest: searchParams.get('interest'),
+        propertyTax: Number(searchParams.get('propertyTax')) / 100,
+        homeAssoc: searchParams.get('homeAssoc'),
+        PMI: searchParams.get('PMI'),
+        homeIns: searchParams.get('homeIns'),
+      }})
       .then((response) => {
-        console.log(response.data);
         setUnloaded(false);
         setData(response.data);
         for (let item in response.data) {
           if (EPPM - response.data[item] >= TPPM) {
-            setCounter(counter + 1);
+            number++
           }
         }
+        setCounter(number);
       })
       .catch((err) => {
         console.log(err);
@@ -68,8 +71,6 @@ function RentalView() {
           <img src={Finances} alt={Finances} className='photo finances' />
           {unloaded ? null : <Typography sx={{ fontSize: '1.2rem', mx: 'auto', mt: '-10px', mb: '5px' }}>{counter} out of 3 matching results</Typography>}
           {unloaded ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
-                    // i Need a message at the top saying something about (the number of matches) out of 3 timeframes match your criteria
-          // I then need three of the same component, but with different props passed in
           <div className='loadedContainer'>
           <Analysis timeframe='30' cost={data.thirtyYear} revenue={EPPM} target={TPPM} />
           <Analysis timeframe='15' cost={data.fifteenYear} revenue={EPPM} target={TPPM} />
