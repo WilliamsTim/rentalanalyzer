@@ -21,7 +21,7 @@ p {
     margin: 0;
     font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.5;
     letter-spacing: 0.00938em;
     text-align: center;
@@ -31,20 +31,26 @@ p {
     height: 75px;
 }
 
-.timespan {
+.inneranalysis {
     margin-top: auto;
     margin-bottom: auto;
-    width: 50px;
+    width: fit-content;
+    margin: auto;
 }
 
-@media screen and (max-width: 850px) {
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+@media screen and (max-width: 800px) {
     .images {
-        height: 55px;
+        height: 50px;
     }
     p {
-        font-size: 0.8rem;
-    }
-    .timespan {
-        width: 40px;
+        font-size: 0.65rem;
     }
 }

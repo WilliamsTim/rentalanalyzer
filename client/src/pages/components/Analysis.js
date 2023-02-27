@@ -16,7 +16,7 @@ function Analysis({ timeframe, cost, revenue, target }) {
   return (
     <div className='analysis'>
       <img src={positive ? positiveHouse : negativeHouse} alt={House} className='images' />
-      <div className='timespan'>
+      <div className='inneranalysis timespan'>
         <p>
           {timeframe}
         </p>
@@ -24,6 +24,38 @@ function Analysis({ timeframe, cost, revenue, target }) {
           Year
         </p>
         {/* Now I just need to add expenses, revenue, profit, target */}
+      </div>
+      <div className='inneranalysis'>
+        <p>
+          Expenses
+        </p>
+        <p className='red'>
+          {`-$${cost}`}
+        </p>
+      </div>
+      <div className='inneranalysis'>
+        <p>
+          Revenue
+        </p>
+        <p className='green'>
+          {`$${revenue}`}
+        </p>
+      </div>
+      <div className='inneranalysis'>
+        <p>
+          Profit
+        </p>
+        <p className={positive ? 'green' : 'red'}>
+          {`${positive ? '' : '-'}$${Math.abs(revenue - cost)}`}
+        </p>
+      </div>
+      <div className='inneranalysis'>
+        <p>
+          Target
+        </p>
+        <p className='green'>
+          {`$${target} min`}
+        </p>
       </div>
     </div>
   )

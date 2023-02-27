@@ -11,6 +11,7 @@ function RentalView() {
   const [searchParams] = useSearchParams();
   const [unloaded, setUnloaded] = useState(true);
   const [data, setData] = useState({});
+  const [counter, setCounter] = useState(0);
   const navigate = useNavigate();
   const EPPM = searchParams.get('EPPM');
   const TPPM = searchParams.get('TPPM');
@@ -38,6 +39,11 @@ function RentalView() {
         console.log(response.data);
         setUnloaded(false);
         setData(response.data);
+        for (let item in response.data) {
+          if (EPPM - response.data[item] >= TPPM) {
+            setCounter(counter + 1);
+          }
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -60,14 +66,14 @@ function RentalView() {
           }}
         >
           <img src={Finances} alt={Finances} className='photo finances' />
-          {unloaded ? null : <Typography sx={{ fontSize: '1.2rem', mx: 'auto', mt: '-10px', mb: '5px' }}>number out of 3 matching results</Typography>}
+          {unloaded ? null : <Typography sx={{ fontSize: '1.2rem', mx: 'auto', mt: '-10px', mb: '5px' }}>{counter} out of 3 matching results</Typography>}
           {unloaded ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> :
                     // i Need a message at the top saying something about (the number of matches) out of 3 timeframes match your criteria
           // I then need three of the same component, but with different props passed in
           <div className='loadedContainer'>
-          <Analysis timeframe='Thirty' cost={data.tenYear} revenue={EPPM} target={TPPM} />
-          <Analysis timeframe='Fifteen' cost={data.fifteenYear} revenue={EPPM} target={TPPM} />
-          <Analysis timeframe='Ten' cost={data.thirtyYear} revenue={EPPM} target={TPPM} />
+          <Analysis timeframe='30' cost={data.thirtyYear} revenue={EPPM} target={TPPM} />
+          <Analysis timeframe='15' cost={data.fifteenYear} revenue={EPPM} target={TPPM} />
+          <Analysis timeframe='10' cost={data.tenYear} revenue={EPPM} target={TPPM} />
           <Button variant='outlined' sx={{ mx: 'auto', mt: '10px' }} onClick={handleReturnHome}>Return To Home Page</Button>
           </div>
           }
