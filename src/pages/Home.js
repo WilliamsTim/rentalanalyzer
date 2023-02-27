@@ -70,7 +70,7 @@ function Home() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            px: 2,
+            px: 3,
             width: '100%',
             position: 'absolute',
             left: `${boxOneSlider}px`,
@@ -189,7 +189,7 @@ function Home() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            px: 2,
+            px: 3,
             width: '100%',
             position: 'absolute',
             left: `${boxTwoSlider}px`,

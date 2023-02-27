@@ -61,7 +61,7 @@ function RentalView() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            px: 2,
+            px: 3,
             width: '100%',
             position: 'absolute',
             left: `0px`,
